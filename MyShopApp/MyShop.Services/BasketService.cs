@@ -15,7 +15,7 @@ namespace MyShop.Services
         IRepository<Product> productContext;
         IRepository<Basket> basketContext;
 
-        public const string BasketSessionName = "eCommercebasket";
+        public const string BasketSessionName = "eCommerceBasket";
         public BasketService(IRepository<Product> _productContext,
         IRepository<Basket> _basketContext)
         {
@@ -92,6 +92,7 @@ namespace MyShop.Services
         {
             Basket basket = GetBasket(httpContext, true);
             BasketItem item = basket.BasketItems.FirstOrDefault(i => i.Id == itemId);
+
             if (item!=null)
             {
                 basket.BasketItems.Remove(item);
@@ -101,6 +102,7 @@ namespace MyShop.Services
         public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)//Using BasketItemViewModel
         {
             Basket basket = GetBasket(httpContext, false);
+
             if (basket!=null)
             {
                 var result = (from b in basket.BasketItems
@@ -109,6 +111,7 @@ namespace MyShop.Services
                               select new BasketItemViewModel()
                               {
                                   Id = b.Id,
+                                  Quantity=b.Quantity,
                                   ProductName = p.Name,
                                   Image = p.Image,
                                   Price = p.Price
@@ -134,6 +137,7 @@ namespace MyShop.Services
                                        join p in productContext.Collection()
                                        on item.ProductId equals p.Id
                                        select item.Quantity * p.Price).Sum();
+
                 model.BasketCount = basketCount ?? 0;
                 model.BasketTotal = basketTotal ?? decimal.Zero;
 
