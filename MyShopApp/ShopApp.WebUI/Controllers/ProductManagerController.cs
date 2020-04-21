@@ -8,6 +8,7 @@ using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
+using System.Data.Entity;
 
 namespace ShopApp.WebUI.Controllers
 {
