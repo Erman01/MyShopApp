@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace ShopApp.WebUI.Controllers
 {
-   
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         IRepository<Product> context;

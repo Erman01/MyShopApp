@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ShopApp.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductCategoryManagerController : Controller
     {
         // GET: ProductCategoryManager
